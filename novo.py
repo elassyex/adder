@@ -22,7 +22,7 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 # Set up bot
-bot = telebot.TeleBot("66114172148:AAFUoZs9LFEIvAMhlNe570THBiUIRjHBBOM")
+bot = telebot.TeleBot("6281409759:AAFaovl4knB0D-IK6J36ncT4JImu-VACYI4")
 
 # Handler for the /start command
 @bot.message_handler(commands=['start'])
