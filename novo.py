@@ -27,7 +27,7 @@ bot = telebot.TeleBot("6114172148:AAFUoZs9LFEIvAMhlNe570THBiUIRjHBBOM")
 # Handler for the /start command
 @bot.message_handler(commands=['start'])
 def start_handler(message):
-    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard = True , one_time_keyboard = True)
+    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard = True)
     markup.row(telebot.types.KeyboardButton('Добавить новый номер'))
     # Send welcome message and instructions
     bot.reply_to(message, "Добро пожаловать в бота Adder Numbers! Нажмите «Добавить новый номер», чтобы начать.", reply_markup=markup)
