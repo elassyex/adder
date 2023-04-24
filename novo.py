@@ -79,8 +79,10 @@ def add(message, markup):
             time.sleep(2)
             print('done')
             bot.send_message(message.chat.id, f"номер {query} Добавлен .", reply_markup=markup)
+            bot.reply_to(message, "хотите добавить новые номера?", reply_markup=markup)
         except:
             bot.reply_to(message, 'oooops')
+            bot.reply_to(message, "Добро пожаловать в бота Adder Numbers! Нажмите «Добавить новый номер», чтобы начать.", reply_markup=markup)
         
 
 
