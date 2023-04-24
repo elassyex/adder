@@ -43,6 +43,8 @@ def start_search(message):
     bot.register_next_step_handler(message, add, markup)
 def add(message, markup):
     # Get search query from message text
+    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard = True)
+    markup.row(telebot.types.KeyboardButton('Добавить новый номер'))
     bot.send_chat_action(message.chat.id, 'typing')
     query = message.text
     if '+7' not in query:
