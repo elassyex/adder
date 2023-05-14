@@ -27,7 +27,7 @@ bot = telebot.TeleBot("6114172148:AAFUoZs9LFEIvAMhlNe570THBiUIRjHBBOM")
 # Handler for the /start command
 @bot.message_handler(commands=['start'])
 def start_handler(message):
-    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard = True)
+    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard = True , one_time_keyboard = True)
     markup.row(telebot.types.KeyboardButton('Добавить новый номер'))
     # Send welcome message and instructions
     bot.reply_to(message, "Добро пожаловать в бота Adder Numbers! Нажмите «Добавить новый номер», чтобы начать.", reply_markup=markup)
@@ -43,8 +43,6 @@ def start_search(message):
     bot.register_next_step_handler(message, add, markup)
 def add(message, markup):
     # Get search query from message text
-    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard = True)
-    markup.row(telebot.types.KeyboardButton('Добавить новый номер'))
     bot.send_chat_action(message.chat.id, 'typing')
     query = message.text
     if '+7' not in query:
@@ -57,6 +55,7 @@ def add(message, markup):
 
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
+
         xc =1
         driver.get(f"https://my.novofon.com/auth")
         number='+79649090038'
@@ -64,27 +63,25 @@ def add(message, markup):
         try:
             driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div[2]/button').click()
             driver.find_element(By.XPATH, '//*[@id="email"]').send_keys('k9587568143@yandex.ru')
-            driver.find_element(By.XPATH, '//*[@id="password"]').send_keys('ZPU5mbzbJNtaei1')
+            driver.find_element(By.XPATH, '//*[@id="password"]').send_keys('Tyurin1989/7509')
 
             driver.find_element(By.XPATH, '//*[@id="submit_button"]').click()
             time.sleep(1)
             driver.get(f"https://my.novofon.com/mypbx/in_calls/edit")
-            time.sleep(1)
             driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[4]/main/div[1]/div/div[1]/div/div[1]/div/div[3]/div[2]/div[1]/div').click()
-            delay(3)
+            delay(2)
             driver.find_element(By.XPATH, '//*[@id="telInputID"]').send_keys(int(query))
-            delay(3)
+            delay(1)
             driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[4]/main/div[1]/div/div[1]/div/div[7]/div[3]/section/div[1]/div[1]/div[2]').click()
 
-            delay(3)
+            delay(1)
             driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[4]/main/div[1]/div/div[1]/div/div[7]/div[4]/div/button[1]').click()
             time.sleep(2)
             print('done')
             bot.send_message(message.chat.id, f"номер {query} Добавлен .", reply_markup=markup)
-            bot.reply_to(message, "хотите добавить новые номера?", reply_markup=markup)
-        except:
+        except Exception as frr:
+            print(frr)
             bot.reply_to(message, 'oooops')
-            bot.reply_to(message, "Добро пожаловать в бота Adder Numbers! Нажмите «Добавить новый номер», чтобы начать.", reply_markup=markup)
         
 
 
@@ -92,10 +89,9 @@ def add(message, markup):
 
 # Start bot
 try:
-    bot.polling()
+    bot.infinity_polling(timeout=10, long_polling_timeout = 5)
 except:
     pass
-    bot.polling()
-# xla = open("wilds.xlsx", "a")
+    bot.infinity_polling(timeout=10, long_polling_timeout = 5)
 
     
